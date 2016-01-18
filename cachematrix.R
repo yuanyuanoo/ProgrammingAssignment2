@@ -9,7 +9,7 @@ makeCacheMatrix <- function(x = matrix()) {
         invrs <<- NULL  # clear cache if the matrix is reset
     }
     get <- function() x
-    setinvrs <- function(m) invrs <<- m
+    setinvrs <- function(inverse) invrs <<- inverse
     getinvrs <- function() invrs
     list (set = set, get = get, setinvrs = setinvrs, getinvrs = getinvrs)
 }
@@ -26,7 +26,7 @@ cacheSolve <- function(x, ...) {
             return(invrs)
         }
         matrix <- x$get()   
-        invrs <- solve(matrix)
+        invrs <- solve(matrix, ...)
         x$setinvrs(invrs)     # Store inverse matrix in cache
         invrs
 }
